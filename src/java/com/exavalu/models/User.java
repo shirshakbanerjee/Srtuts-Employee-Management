@@ -34,6 +34,7 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
     private String password;
     private String firstName;
     private String lastName;
+    private int status;
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
@@ -124,5 +125,19 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         } catch (IOException ex) {
         }
         return result;
+    }
+
+    /**
+     * @return the status
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

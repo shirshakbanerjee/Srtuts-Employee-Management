@@ -64,12 +64,13 @@ public class LoginService {
     public static boolean sendData(User user) throws IOException {
         boolean result = false;
         try (Connection con = JDBCConnectionManager.getConnection()) {
-            String sql2 = "INSERT INTO users (emailAddress, password, firstName, lastName) values(?,?,?,?)";
+            String sql2 = "INSERT INTO users (emailAddress, password, firstName, lastName,status) values(?,?,?,?,?)";
             PreparedStatement preparedStatement = con.prepareStatement(sql2);
             preparedStatement.setString(1, user.getEmailAddress());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
+            preparedStatement.setInt(5, 1);
             int row = preparedStatement.executeUpdate();
             System.out.println(row);
             if (row != 0) {
@@ -78,11 +79,7 @@ public class LoginService {
 
             con.close();
         } catch (SQLException ex) {
-            int errorCode = ex.getErrorCode();
-            System.out.println("Error Code =" + errorCode);
-            if (errorCode != 1062) {
-                result = false;
-            }
+            ex.printStackTrace();
         }
         return result;
     }
