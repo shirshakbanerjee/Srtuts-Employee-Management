@@ -3,16 +3,19 @@
 <html lang="en">
     <head>
         <title>Employee Management V2</title>
-        
+
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/home.css"/>
-        <!-- Custom styles for this template -->
+        <!-- C
+                ustom styles for this template -->
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     </head>
+   
+
     <body class="text-center">
         <jsp:include page="menu.jsp"></jsp:include>
-        <main>
+        <main id="tableShow">
             <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

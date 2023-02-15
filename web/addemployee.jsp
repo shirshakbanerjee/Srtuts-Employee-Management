@@ -18,7 +18,7 @@
         <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body class="text-center">
-        <jsp:include page="menu.jsp"></jsp:include>
+       
 
             <main role="main">
                 <div class="jumbotron">

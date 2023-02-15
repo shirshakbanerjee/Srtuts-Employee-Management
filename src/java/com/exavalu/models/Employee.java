@@ -344,4 +344,19 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         return res;
     }
     
+     public String showEmployee() throws Exception {
+        String res = "FAILURE";
+        ArrayList emps = EmployeeService.getAllEmployees();
+        
+        if (!emps.isEmpty()) {
+            sessionMap.put("EmpList", emps);
+            res = "SUCCESS";
+        }
+        return res;
+    }
+     
+     public String addEmployees() throws Exception {
+        String res = "ADDED";
+        return res;
+    }
 }

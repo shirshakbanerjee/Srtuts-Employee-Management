@@ -21,7 +21,7 @@
             <main role="main">
                 <div class="jumbotron m-auto p-5">
                     <div class="container">
-                        <h1 class="display-5">Enter Details!</h1>
+                        <h1 class="display-5">Search for Employee</h1>
                     </div>
                     <div class="container" >
                         <form class="form-inline" action="SearchEmployee" method="get">
@@ -52,16 +52,16 @@
                 <div class="table-responsive justify-content-between">
                     
                     <div class="form-group m-auto">
-                        <label>Select No of Rows</label>
+                        <label><h3>Rows to show:---</h3></label>
                         <select class  ="form-control" name="state" id="maxRows">
                             <option value="5000">Show ALL Rows</option>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="70">70</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="32">32</option>
+                            <option value="64">64</option>
                             <option value="100">100</option>
+                            
                         </select>
                     </div>
                     <table class="table table-bordered table-hover" id="table-id">

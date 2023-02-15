@@ -6,8 +6,9 @@ package com.exavalu.models;
 
 import com.exavalu.services.DepartmentService;
 import com.exavalu.services.EmployeeService;
-import com.exavalu.services.LoginService;
+
 import com.exavalu.services.RoleService;
+import com.exavalu.services.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.IOException;
@@ -34,6 +35,12 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
     private String password;
     private String firstName;
     private String lastName;
+    private String addressLine1;
+    private String addressLine2;
+    private String phoneNumber;
+    private String countryCode;
+    private String stateCode;
+    private String distCode;
     private int status;
 
     public void setEmailAddress(String emailAddress) {
@@ -68,6 +75,65 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         return lastName;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
+
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+    }
+
+    public String getDistCode() {
+        return distCode;
+    }
+
+    public void setDistCode(String distCode) {
+        this.distCode = distCode;
+    }
+
     private SessionMap<String, Object> sessionMap = (SessionMap) ActionContext.getContext().getSession();
 
     private ApplicationMap map = (ApplicationMap) ActionContext.getContext().getApplication();
@@ -85,7 +151,7 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
     public String doLogin() throws Exception {
         String result = "FAILURE";
 
-        boolean success = LoginService.getInstance().doLogin(this);
+        boolean success = UserService.getInstance().doLogin(this);
         ArrayList empList = EmployeeService.getAllEmployees();
         ArrayList deptList = DepartmentService.getAllDepartment();
         ArrayList roleList = RoleService.getAllRole();
@@ -114,11 +180,10 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         String result = "FAILURE";
 
         try {
-            boolean res = LoginService.sendData(this);
-            if (res){
+            boolean res = UserService.sendData(this);
+            if (res) {
                 result = "SUCCESS";
-            }
-            else{
+            } else {
                 String alreadyExist = "Email Id Already Exist";
                 sessionMap.put("AlreadyExist", alreadyExist);
             }
@@ -127,17 +192,49 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         return result;
     }
 
-    /**
-     * @return the status
-     */
-    public int getStatus() {
-        return status;
-    }
+    public String doPreSignup() throws Exception {
 
-    /**
-     * @param status the status to set
-     */
-    public void setStatus(int status) {
-        this.status = status;
-    }
+        String result = "SUCCESS";
+
+        ArrayList countryList = UserService.getAllCountries();
+        ArrayList stateList;
+        ArrayList distList;
+
+        sessionMap.put("CountryList", countryList);
+        
+        System.err.println("CountryCode "+this.countryCode);
+        System.err.println("StateCode "+this.stateCode);
+        System.err.println("DistCode "+this.distCode);
+        
+        if(this.countryCode!=null)
+        {
+            System.err.println("Selected country:: "+this.countryCode);
+            stateList = UserService.getAllStates(this.countryCode);
+            sessionMap.put("StateList", stateList);
+            sessionMap.put("User", this);
+            result="STATELIST";
+        }
+        
+        if(this.stateCode!=null)
+        {
+            System.err.println("Selected state:: "+this.stateCode);
+            distList = UserService.getAllDistricts(this.stateCode);
+            sessionMap.put("DistList", distList);
+            sessionMap.put("User", this);
+            result="DISTRICTLIST";
+        }
+        
+       if (this.firstName != null && this.firstName.length()>0 && this.lastName != null && this.lastName.length()>0 && this.emailAddress != null && this.emailAddress.length()>0 && this.password!= null && this.password.length()>0 && this.stateCode != null && this.stateCode.length() > 0 && this.countryCode != null && this.countryCode.length() > 0 && this.distCode != null && this.distCode.length() > 0) {
+            System.out.println(firstName + lastName +  emailAddress + password+ this.getStateCode()+ this.getCountryCode()+ this.getDistCode());
+            boolean res = UserService.sendData(this);
+            if (res) {
+                result = "GOOD";
+            } else {
+                String alreadyExist = "Email Id Already Exist";
+                sessionMap.put("AlreadyExist", alreadyExist);
+            }
+        
+}
+        return result;
+}
 }

@@ -6,17 +6,22 @@
     <!-- Configuration for the default package. -->
     <package name="default" namespace="/" extends="struts-default">
         <action name="Login" class="com.exavalu.models.User" method="doLogin">
-            <result name="SUCCESS">showemployee.jsp</result>
+            <result name="SUCCESS">home.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
         <action name="Logout" class="com.exavalu.models.User" method="doLogOut">
             <result name="SUCCESS">home.jsp</result>
             <result name="FAILURE">home.jsp</result>
         </action>
-        <action name="AddEmployee" class="com.exavalu.models.Employee" method="addNewEmployee">
-            <result name="SUCCESS">addemployee.jsp</result>
-            <result name="FAILURE">addemployee.jsp</result>
+        <action name="ShowEmployee" class="com.exavalu.models.Employee" method="showEmployee">
+            <result name="SUCCESS">showemployee.jsp</result>
+            <result name="FAILURE">login.jsp</result>
         </action>
+        <action name="AddEmployee" class="com.exavalu.models.Employee" method="addNewEmployee">
+            <result name="SUCCESS">home.jsp</result>
+          
+        </action>
+       
         <action name="EditEmployee" class="com.exavalu.models.Employee" method="editEmployee">
             <result name="SUCCESS">editemployee.jsp</result>
             <result name="FAILURE">showemployee.jsp</result>
@@ -25,6 +30,7 @@
             <result name="SUCCESS">showemployee.jsp</result>
             <result name="FAILURE">editemployee.jsp</result>
         </action>
+       
         <action name="DeleteEmployee" class="com.exavalu.models.Employee" method="deleteEmployee">
             <result name="SUCCESS">showemployee.jsp</result>
             <result name="FAILURE">showemployee.jsp</result>
@@ -36,6 +42,20 @@
         <action name="Signup" class="com.exavalu.models.User" method="addUser">
             <result name="SUCCESS">login.jsp</result>
             <result name="FAILURE">signup.jsp</result>
+        </action>   
+        <action name="ConsumeAPI" class="com.exavalu.models.APIUser" method="getDataFromAPI">
+            <result name="SUCCESS">apiuser.jsp</result>
+            <result name="FAILURE">signup.jsp</result>
+        </action>   
+        <action name="PreSignup" class="com.exavalu.models.User" method="doPreSignup">
+            <result name="STATELIST">statelist.jsp</result>
+            <result name="DISTRICTLIST">distlist.jsp</result>
+            <result name="SUCCESS">signup.jsp</result>
+            <result name="GOOD">login.jsp</result>
+            <result name="EXISTS">signup.jsp</result>
         </action>      
     </package>
 </struts>
+
+
+

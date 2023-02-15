@@ -11,10 +11,11 @@ package com.exavalu.models;
 public class Role {
     private int roleId;
     private String roleName;
-
+    
     /**
      * @return the roleId
-     */
+     */    
+    
     public int getRoleId() {
         return roleId;
     }
