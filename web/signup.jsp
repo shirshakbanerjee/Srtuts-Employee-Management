@@ -41,10 +41,15 @@
 
     <body class="text-center">
         <main class="form-signin w-100 m-auto">
+            <c:if test="${not empty sessionScope.AlreadyExist}">
+                    <div class="alert alert-danger" role="alert">
+                        <c:out value="${sessionScope.AlreadyExist}"/>
+                    </div>
+                </c:if>
             <h3 class="display-3">Register</h3>
 
             <img class="mb-4" src="images/flower-logo.jpg" alt="" width="200" height="200">
-            <form action="PreSignup" method="Post" id="signupForm">
+            <form action="Signup" method="Post" id="signupForm">
                 <div class="form-floating">
                     <input type="email" class="form-control" id="floatingInput" placeholder="name@domain.com" name="emailAddress" value="${User.getEmailAddress()}" required>
                     <label for="floatingInput">Email address</label>

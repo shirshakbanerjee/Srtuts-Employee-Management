@@ -18,8 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -164,9 +163,12 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
             sessionMap.put("RoleList", roleList);
             result = "SUCCESS";
         } else {
-            String loginErrorMsg = "Either Email or Password is Wrong!";
+           String loginErrorMsg = "Either Email or Password is Wrong!";
             sessionMap.put("LoginErrorMsg", loginErrorMsg);
-            System.out.println("returning Failure from doLogin method");
+            //System.out.println("returning Failure from doLogin method");
+            Logger log = Logger.getLogger(User.class.getName());            
+            log.error("Incorrect email or password");
+            System.out.println("returning Failure from Login method");
         }
         return result;
     }
@@ -186,6 +188,9 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
             } else {
                 String alreadyExist = "Email Id Already Exist";
                 sessionMap.put("AlreadyExist", alreadyExist);
+                Logger log = Logger.getLogger(User.class.getName());
+            log.error("Email id already exists|||returning Failure from Login method");
+            //System.out.println("returning Failure from Login method");
             }
         } catch (IOException ex) {
         }

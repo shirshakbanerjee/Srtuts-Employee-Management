@@ -11,12 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 /**
  *
  * @author Avijit Chattopadhyay
  */
 public class EmployeeService {
+    
+    
 
     public static ArrayList getAllEmployees() {
         ArrayList empList = new ArrayList();
@@ -42,6 +43,7 @@ public class EmployeeService {
                 empList.add(emp);
             }
         } catch (SQLException ex) {
+            //logger.error("An error occurred for function getAllEmployees: ", ex);
         }
         System.out.println("Total rows" + empList.size());
 
@@ -74,6 +76,9 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+            
+            //logger.error("An error occurred for function getEmployee: ", ex);
+            
         }
         return emp;
     }
@@ -105,6 +110,7 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+           //logger.error("An error occurred for function addEmployee: ", ex);
         }
         return result;
     }
@@ -139,6 +145,7 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+            //logger.error("An error occurred for function updateEmployee: ", ex);
         }
         return result;
     }
